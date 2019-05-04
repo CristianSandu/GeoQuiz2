@@ -1,7 +1,9 @@
 package com.example.geoquiz2;
 
+import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -20,22 +22,37 @@ public class MainActivity extends AppCompatActivity {
     // question Text View
     private TextView mQuestionTextView;
     // the array of questions  with their answers
-    private Question[] mQuestionBank = new Question[]{
-            new Question(R.string.question_australia, true),
-            new Question(R.string.question_oceans, true),
-            new Question(R.string.question_mideast, false),
-            new Question(R.string.question_africa, false),
-            new Question(R.string.question_americas, true),
-            new Question(R.string.question_asia, true),
-    };
+    private Question[] mQuestionBank = MethodsHelper.getQuest();
+
+    // can't press twice the answer for the same Question
+    private boolean [] isQuestionAnswered = new boolean []{true, true, true, true, true, true} ;
 
     // index on array of questions
     private int mCurrentIndex = 0;
+
+    // adding a tag
+    private static final String TAG = "QuizActivity";
+
+
+
+
+
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // The d stands for “debug” and refers to the level of the log message.
+        Log.d(TAG, "onCreate(Bundle) called");
+
+        if (savedInstanceState != null) {
+            mCurrentIndex = savedInstanceState.getInt(KEY_INDEX);
+        }
+
 
         // get the int ref to buttons from R using findViewById()
         mTrueButton = findViewById(R.id.true_button);
@@ -51,14 +68,28 @@ public class MainActivity extends AppCompatActivity {
         mTrueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                checkAnswer(true);
+
+                    checkAnswer(true);
+
             }
         });
         // added toasts when button clicked
         mFalseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                checkAnswer(false);
+
+                    checkAnswer(false);
+
+            }
+        });
+
+
+
+        mQuestionTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
+                mQuestionTextView = MethodsHelper.updateQuestion(  mQuestionBank,  mCurrentIndex,  mQuestionTextView);
             }
         });
 
@@ -66,15 +97,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
-                updateQuestion();
-            }
-        });
+//                if(isQuestionAnswered[mCurrentIndex] == true) isQuestionAnswered[mCurrentIndex] = false;
+//                if (isQuestionAnswered[mCurrentIndex] == false){
+//                    mFalseButton.setEnabled(false);
+//                    mTrueButton.setEnabled(false);
+//                }else{
+//                    mFalseButton.setEnabled(true);
+//                    mTrueButton.setEnabled(true);
+//                }
 
-        mQuestionTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
-                updateQuestion();
+                mQuestionTextView = MethodsHelper.updateQuestion(  mQuestionBank,  mCurrentIndex,  mQuestionTextView);
             }
         });
 
@@ -82,20 +114,25 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                  mCurrentIndex = abs((mCurrentIndex - 1) % mQuestionBank.length);
-                updateQuestion();
+//                if(isQuestionAnswered[mCurrentIndex] == true) isQuestionAnswered[mCurrentIndex] = false;
+//                if (isQuestionAnswered[mCurrentIndex] == false){
+//                    mFalseButton.setEnabled(false);
+//                    mTrueButton.setEnabled(false);
+//                }else{
+//                    mFalseButton.setEnabled(true);
+//                    mTrueButton.setEnabled(true);
+//                }
+                mQuestionTextView = MethodsHelper.updateQuestion(mQuestionBank, mCurrentIndex, mQuestionTextView);
             }
         });
 
 
         //  Encapsulating with updateQuestion()
-        updateQuestion();
+        mQuestionTextView = MethodsHelper.updateQuestion(  mQuestionBank,  mCurrentIndex,  mQuestionTextView);
     }
 
-    //  Encapsulating with updateQuestion()
-    private void updateQuestion() {
-        int question = mQuestionBank[mCurrentIndex].getTextResId();
-        mQuestionTextView.setText(question);
-    }
+
+
 
 //    This method will accept a boolean variable that identifies whether the user pressed TRUE or FALSE.
 //    Then, it will check the user’s answer against the answer in the current Question object. Finally, after
@@ -103,11 +140,56 @@ public class MainActivity extends AppCompatActivity {
 //    message to the user.
     private void checkAnswer (boolean userPressedTrue){
         boolean answerIsTrue = mQuestionBank[mCurrentIndex].isAnswerTrue();
+        isQuestionAnswered[mCurrentIndex] = false;
         int messageResId = 0;
         if (userPressedTrue == answerIsTrue) messageResId = R.string.correct_toast;
         else messageResId = R.string.incorrect_toast;
 
         Toast.makeText(this, messageResId, Toast.LENGTH_SHORT).show();
+
+    }
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.d(TAG, "onStart() called");
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d(TAG, "onResume() called");
+    }
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.d(TAG, "onPause() called");
+    }
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.d(TAG, "onStop() called");
+    }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.d(TAG, "onDestroy() called");
+    }
+
+    //
+    private static final String KEY_INDEX = "index";
+//    The post-rotation QuizActivity instance needs to know the old value of
+//    mCurrentIndex. You need a way to save this data across a runtime configuration change, like rotation.
+//    One way to do this is to override the onSaveInstanceState()
+//     This method is called before onStop(), except when the user presses the Back button
+//    The default implementation of onSaveInstanceState(Bundle) directs all of the activity’s views to
+//    save their state as data in the Bundle object. A Bundle is a structure that maps string keys to values of
+//    certain limited types.
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        Log.i(TAG, "onSaveInstanceState");
+        outState.putInt(KEY_INDEX, mCurrentIndex);
 
     }
 }
