@@ -7,12 +7,15 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import static java.lang.Math.abs;
+
 public class MainActivity extends AppCompatActivity {
 
     // Buttons
     private Button mTrueButton;
     private Button mFalseButton;
     private Button mNextButton;
+    private Button mPrevButton;
 
     // question Text View
     private TextView mQuestionTextView;
@@ -38,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         mTrueButton = findViewById(R.id.true_button);
         mFalseButton = findViewById(R.id.false_button);
         mNextButton = findViewById(R.id.next_button);
+        mPrevButton = findViewById(R.id.prev_button);
 
         // setting text to question
         mQuestionTextView = findViewById(R.id.question_text);
@@ -65,6 +69,23 @@ public class MainActivity extends AppCompatActivity {
                 updateQuestion();
             }
         });
+
+        mQuestionTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
+                updateQuestion();
+            }
+        });
+
+        mPrevButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                 mCurrentIndex = abs((mCurrentIndex - 1) % mQuestionBank.length);
+                updateQuestion();
+            }
+        });
+
 
         //  Encapsulating with updateQuestion()
         updateQuestion();
