@@ -19,11 +19,15 @@
         android:orientation="horizontal" >
         <Button
             android:id="@+id/true_button"
+            android:background="@android:color/holo_green_light"
+            android:textColor="@android:color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/true_button" />
         <Button
             android:id="@+id/false_button"
+            android:background="@android:color/holo_red_dark"
+            android:textColor="@android:color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/false_button" />
@@ -35,6 +39,8 @@
 
         <Button
             android:id="@+id/prev_button"
+            android:background="@android:color/holo_orange_light"
+            android:textColor="@android:color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/prev_button"
@@ -44,6 +50,8 @@
 
         <Button
             android:id="@+id/next_button"
+            android:background="@android:color/holo_green_light"
+            android:textColor="@android:color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/next_button"
