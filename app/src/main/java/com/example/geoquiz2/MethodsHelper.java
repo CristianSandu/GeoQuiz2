@@ -25,4 +25,8 @@ public class MethodsHelper {
     public static Question [] getQuest (){
         return q;
     }
+
+    public static void checkIfAlreadyAnswered(){
+        return;
+    }
 }

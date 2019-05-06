@@ -1,6 +1,6 @@
 package com.example.geoquiz2;
 
-import android.os.PersistableBundle;
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -68,18 +68,14 @@ public class MainActivity extends AppCompatActivity {
         mTrueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                     checkAnswer(true);
-
             }
         });
         // added toasts when button clicked
         mFalseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                     checkAnswer(false);
-
             }
         });
 
@@ -97,14 +93,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
-//                if(isQuestionAnswered[mCurrentIndex] == true) isQuestionAnswered[mCurrentIndex] = false;
-//                if (isQuestionAnswered[mCurrentIndex] == false){
-//                    mFalseButton.setEnabled(false);
-//                    mTrueButton.setEnabled(false);
-//                }else{
-//                    mFalseButton.setEnabled(true);
-//                    mTrueButton.setEnabled(true);
-//                }
+                if (isQuestionAnswered[mCurrentIndex]){
+                    mTrueButton.setEnabled(true);
+                    mFalseButton.setEnabled(true);
+                } else {
+                    mTrueButton.setEnabled(false);
+                    mFalseButton.setEnabled(false);
+                }
 
                 mQuestionTextView = MethodsHelper.updateQuestion(  mQuestionBank,  mCurrentIndex,  mQuestionTextView);
             }
@@ -114,14 +109,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                  mCurrentIndex = abs((mCurrentIndex - 1) % mQuestionBank.length);
-//                if(isQuestionAnswered[mCurrentIndex] == true) isQuestionAnswered[mCurrentIndex] = false;
-//                if (isQuestionAnswered[mCurrentIndex] == false){
-//                    mFalseButton.setEnabled(false);
-//                    mTrueButton.setEnabled(false);
-//                }else{
-//                    mFalseButton.setEnabled(true);
-//                    mTrueButton.setEnabled(true);
-//                }
+                if (isQuestionAnswered[mCurrentIndex]){
+                    mTrueButton.setEnabled(true);
+                    mFalseButton.setEnabled(true);
+                } else {
+                    mTrueButton.setEnabled(false);
+                    mFalseButton.setEnabled(false);
+                }
                 mQuestionTextView = MethodsHelper.updateQuestion(mQuestionBank, mCurrentIndex, mQuestionTextView);
             }
         });
@@ -140,7 +134,9 @@ public class MainActivity extends AppCompatActivity {
 //    message to the user.
     private void checkAnswer (boolean userPressedTrue){
         boolean answerIsTrue = mQuestionBank[mCurrentIndex].isAnswerTrue();
+
         isQuestionAnswered[mCurrentIndex] = false;
+
         int messageResId = 0;
         if (userPressedTrue == answerIsTrue) messageResId = R.string.correct_toast;
         else messageResId = R.string.incorrect_toast;
