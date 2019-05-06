@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,8 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private Question[] mQuestionBank = MethodsHelper.getQuest();
 
     // can't press twice the answer for the same Question
-    private boolean [] isQuestionAnswered = new boolean []{true, true, true, true, true, true} ;
-
+    private boolean [] isQuestionAnswered = MethodsHelper.getIsQuestionAnswered();
     // index on array of questions
     private int mCurrentIndex = 0;
 
@@ -44,6 +45,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(
+                WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
 
         // The d stands for “debug” and refers to the level of the log message.
@@ -84,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
         mQuestionTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
+//                mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
                 mQuestionTextView = MethodsHelper.updateQuestion(  mQuestionBank,  mCurrentIndex,  mQuestionTextView);
             }
         });
@@ -155,6 +160,11 @@ public class MainActivity extends AppCompatActivity {
     public void onResume() {
         super.onResume();
         Log.d(TAG, "onResume() called");
+        int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_FULLSCREEN;
+
+        View decorView = getWindow().getDecorView();
+        decorView.setSystemUiVisibility(uiOptions);
     }
     @Override
     public void onPause() {

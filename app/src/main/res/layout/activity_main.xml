@@ -1,22 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:background="@drawable/and_map">
+
+
     <TextView
+        android:id="@+id/question_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="24dp"
-        android:id="@+id/question_text" />
-
-
+        android:layout_gravity="top|center_horizontal"
+        android:paddingTop="20pt"
+        android:paddingHorizontal="5pt"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="16pt"/>
 
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:padding="24dp">
         <Button
             android:id="@+id/true_button"
             android:background="@android:color/holo_green_light"
@@ -33,9 +41,7 @@
             android:text="@string/false_button" />
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+
 
         <Button
             android:id="@+id/prev_button"
@@ -45,7 +51,8 @@
             android:layout_height="wrap_content"
             android:text="@string/prev_button"
             android:drawableLeft="@drawable/arrow_left"
-            android:drawablePadding="4dp"/>
+            android:drawablePadding="4dp"
+            android:layout_gravity="bottom|left"/>
 
 
         <Button
@@ -56,11 +63,12 @@
             android:layout_height="wrap_content"
             android:text="@string/next_button"
             android:drawableRight="@drawable/arrow_right"
-            android:drawablePadding="4dp"/>
+            android:drawablePadding="4dp"
+            android:layout_gravity="bottom|right"/>
 
 
 
-    </LinearLayout>
 
 
-</LinearLayout>
+
+</FrameLayout>

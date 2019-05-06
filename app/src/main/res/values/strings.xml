@@ -14,6 +14,30 @@
     <string name="question_americas">The Amazon River is the longest river in the Americas.</string>
     <string name="question_asia">Lake Baikal is the world\'s oldest and deepest freshwater lake.</string>
 
-
+    <string name="question_nevada"> Reno Nevada is father west than Los Angeles California.</string>
+    <string name="question_London"> Despite its northerly location, London is usually warmer in the winter than Salt Lake City.</string>
+    <string name="question_Matherhorn"> The Matterhorn is the highest mountain in Switzerland.</string>
+    <string name="question_Cuba">  Cuba and Dominican Republic are the two most popular tourist destinations in the Caribbean Sea.</string>
+    <string name="question_Equatorial_Guinea">  Equatorial Guinea is one of the richest countries in Africa.</string>
+    <string name="question_Iceland"> Most of Iceland is too cold for trees to grow.</string>
+    <string name="question_tigers">Wild tigers have been known to kill natives in Africa.</string>
+    <string name="question_Nicaragua">Statistically, Nicaragua is considered to be the second safest countries to travel in the Americas.</string>
+    <string name="question_Brazil">Statistically, Brazil is one of the most dangerous countries to travel in Latin America.</string>
+    <string name="question_Ulaanbaatar">  Ulaanbaatar is the coldest national capital I the world.</string>
+    <string name="question_Bermuda"> Bermuda is in the tropics.</string>
+    <string name="question_Sultan_of_Brunei"> The Sultan of Brunei is one of the richest people in the world when you include royalty. He lives in an oil rich Muslim country in the Middle East.</string>
+    <string name="question_Ural_Mountains"> The Ural Mountains are one of the highest mountain ranges in Russia.</string>
+    <string name="question_Kauai">The wettest place in the world is a location on the island of Kauai in Hawaii.</string>
+    <string name="question_Peru">Because of its warm, sunny climate and warm ocean waters, coastal Peru is a popular beach destination in South America.</string>
+    <string name="question_Montana">Montana has bigger glaciers than Iran.</string>
+    <string name="question_equator">More of Africa is south of the equator than is north of the equator.</string>
+    <string name="question_tibet">Most of Tibet is covered with permanent snow.</string>
+    <string name="question_flat_australia">Most of Australia is flat.</string>
+    <string name="question_Kilimanjaro">Although they are very near the equator, Kilimanjaro and Mount Kenya have the largest glaciers in Africa.</string>
+    <string name="question_Cotopaxi">Cotopaxi is the highest volcano in the world.</string>
+    <string name="question_Maine">The closest US state to Europe is Maine.</string>
+    <string name="question_Mexico">By average world standards, Mexico is a rich country.</string>
+    <string name="question_glaciers">Mount Fuji has glaciers.</string>
+    <string name="question_asia_timbuktu"> Timbuktu is in Asia.</string>
 
 </resources>
